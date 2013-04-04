@@ -7,3 +7,4 @@ dependencies[] = context
 
 files[] = custom_context_context_condition_publish.inc
 files[] = custom_context_context_condition_expire.inc
+files[] = custom_context_context_condition_userpermission.inc

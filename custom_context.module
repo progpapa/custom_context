@@ -26,6 +26,14 @@ function custom_context_context_plugins() {
       'parent' => 'custom_context_context_condition_publish',
     ),
   );
+  $plugins['custom_context_context_condition_userpermission'] = array(
+    'handler' => array(
+      'path' => drupal_get_path('module', 'custom_context') . '/plugins',
+      'file' => 'custom_context_context_condition_userpermission.inc',
+      'class' => 'custom_context_context_condition_userpermission',
+      'parent' => 'context_condition',
+    ),
+  );
   return $plugins;
 } // custom_context_context_plugins
 
@@ -43,6 +51,10 @@ function custom_context_context_registry() {
         'title' => t('Expire Date/Time'),
         'plugin' => 'custom_context_context_condition_expire',
       ),
+      'userpermission' => array(
+        'title' => t('User permission'),
+        'plugin' => 'custom_context_context_condition_userpermission',
+      ),
     ),
   );
 } // custom_context_context_registry
@@ -58,5 +70,9 @@ function custom_context_context_page_condition() {
   // Load the expire plugin and execute.
   if ($plugin = context_get_plugin('condition', 'expire')) {
     $plugin->execute();
+  } // if
+  if ($plugin = context_get_plugin('condition', 'userpermission')) {
+    global $user;
+    $plugin->execute($user);
   } // if
 } // custom_context_context_page_condition
