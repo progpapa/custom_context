@@ -72,7 +72,6 @@ function custom_context_context_page_condition() {
     $plugin->execute();
   } // if
   if ($plugin = context_get_plugin('condition', 'userpermission')) {
-    global $user;
-    $plugin->execute($user);
+    $plugin->execute();
   } // if
 } // custom_context_context_page_condition

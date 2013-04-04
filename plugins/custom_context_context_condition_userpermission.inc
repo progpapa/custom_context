@@ -39,7 +39,7 @@ class custom_context_context_condition_userpermission extends context_condition{
     return drupal_map_assoc(array($values));
   } // condition_form_submit
 
-  function execute($account) {
+  function execute() {
     if ($this->condition_used()) {
       foreach ($this->get_contexts() as $context) {
         $perms = array_keys($this->fetch_from_context($context, 'values'));
