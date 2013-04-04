@@ -1,0 +1,6 @@
+name = Custom Context
+description = Defines custom context conditions and reactions
+package = context
+core = 7.x
+
+dependencies[] = context
