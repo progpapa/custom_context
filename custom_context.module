@@ -66,6 +66,7 @@ function custom_context_context_page_condition() {
   $conditions = array(
     'publish',
     'expire',
+    'userpermission',
   );
   // Load the condition plugins and execute.
   foreach ($conditions as $condition) {
@@ -73,7 +74,4 @@ function custom_context_context_page_condition() {
       $plugin->execute();
     } // if
   } // foreach
-  if ($plugin = context_get_plugin('condition', 'userpermission')) {
-    $plugin->execute();
-  } // if
 } // custom_context_context_page_condition
