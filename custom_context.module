@@ -18,6 +18,14 @@ function custom_context_context_plugins() {
       'parent' => 'context_condition',
     ),
   );
+  $plugins['custom_context_context_condition_expire'] = array(
+    'handler' => array(
+      'path' => drupal_get_path('module', 'custom_context') . '/plugins',
+      'file' => 'custom_context_context_condition_expire.inc',
+      'class' => 'custom_context_context_condition_expire',
+      'parent' => 'custom_context_context_condition_publish',
+    ),
+  );
   return $plugins;
 } // custom_context_context_plugins
 
@@ -31,6 +39,11 @@ function custom_context_context_registry() {
         'title' => t('Publish Date/Time'),
         'plugin' => 'custom_context_context_condition_publish',
       ),
+      'expire' => array(
+        'title' => t('Expire Date/Time'),
+        'plugin' => 'custom_context_context_condition_expire',
+      ),
+    ),
   );
 } // custom_context_context_registry
 
@@ -40,6 +53,10 @@ function custom_context_context_registry() {
 function custom_context_context_page_condition() {
   // Load the publish plugin and execute.
   if ($plugin = context_get_plugin('condition', 'publish')) {
+    $plugin->execute();
+  } // if
+  // Load the expire plugin and execute.
+  if ($plugin = context_get_plugin('condition', 'expire')) {
     $plugin->execute();
   } // if
 } // custom_context_context_page_condition
