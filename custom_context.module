@@ -51,12 +51,14 @@ function custom_context_context_registry() {
  * Implementation of hook_context_page_condition().
  */
 function custom_context_context_page_condition() {
-  // Load the publish plugin and execute.
-  if ($plugin = context_get_plugin('condition', 'publish')) {
-    $plugin->execute();
-  } // if
-  // Load the expire plugin and execute.
-  if ($plugin = context_get_plugin('condition', 'expire')) {
-    $plugin->execute();
-  } // if
+  $conditions = array(
+    'publish',
+    'expire',
+  );
+  // Load the condition plugins and execute.
+  foreach ($conditions as $condition) {
+    if ($plugin = context_get_plugin('condition', $condition)) {
+      $plugin->execute();
+    } // if
+  } // foreach
 } // custom_context_context_page_condition
