@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @file
+ * Custom contexts.
+ */
+
+/**
+ * Implements hook_context_plugins().
+ */
+function custom_context_context_plugins() {
+  $plugins = array();
+  $plugins['custom_context_context_condition_publish'] = array(
+    'handler' => array(
+      'path' => drupal_get_path('module', 'custom_context') . '/plugins',
+      'file' => 'custom_context_context_condition_publish.inc',
+      'class' => 'custom_context_context_condition_publish',
+      'parent' => 'context_condition',
+    ),
+  );
+  return $plugins;
+} // custom_context_context_plugins
+
+ /**
+ * Implements hook_context_registry().
+ */
+function custom_context_context_registry() {
+  return array(
+    'conditions' => array(
+      'publish' => array(
+        'title' => t('Publish Date/Time'),
+        'plugin' => 'custom_context_context_condition_publish',
+      ),
+  );
+} // custom_context_context_registry
+
+ /**
+ * Implementation of hook_context_page_condition().
+ */
+function custom_context_context_page_condition() {
+  // Load the publish plugin and execute.
+  if ($plugin = context_get_plugin('condition', 'publish')) {
+    $plugin->execute();
+  } // if
+} // custom_context_context_page_condition

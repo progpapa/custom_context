@@ -4,3 +4,5 @@ package = context
 core = 7.x
 
 dependencies[] = context
+
+files[] = custom_context_context_condition_publish.inc
