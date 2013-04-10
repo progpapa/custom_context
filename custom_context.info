@@ -9,3 +9,4 @@ files[] = plugins/custom_context_context_condition_publish.inc
 files[] = plugins/custom_context_context_condition_expire.inc
 files[] = plugins/custom_context_context_condition_userpermission.inc
 files[] = plugins/custom_context_context_condition_timebased.inc
+files[] = plugins/custom_context_context_reaction_showmessage.inc
