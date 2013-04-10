@@ -56,19 +56,21 @@ class custom_context_context_condition_publish extends context_condition {
    *  defaults to time()
    */
   function execute($value = NULL) {
-    // If nothing is passed then use now
-    if (empty($value)) {
-      $value = time();
-    } // if
-
-    foreach (context_enabled_contexts() as $context) {
-      if ($date_time = $this->fetch_from_context($context, 'values')) {
-        // If the current date is after the published date then set the condition
-        if ($date_time[0] <= $value) {
-          $this->condition_met($context, $value);
-        } // if
+    if ($this->condition_used()) {
+      // If nothing is passed then use now
+      if (empty($value)) {
+        $value = time();
       } // if
-    } // foreach
+
+      foreach (context_enabled_contexts() as $context) {
+        if ($date_time = $this->fetch_from_context($context, 'values')) {
+          // If the current date is after the published date then set the condition
+          if ($date_time[0] <= $value) {
+            $this->condition_met($context, $value);
+          } // if
+        } // if
+      } // foreach
+    } // if
   } // execute
 
 } // custom_context_context_condition_publish
