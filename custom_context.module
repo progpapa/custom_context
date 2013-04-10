@@ -42,6 +42,15 @@ function custom_context_context_plugins() {
       'parent' => 'context_condition',
     ),
   );
+
+  $plugins['custom_context_context_reaction_showmessage'] = array(
+    'handler' => array(
+      'path' => drupal_get_path('module', 'custom_context') .'/plugins',
+      'file' => 'custom_context_context_reaction_showmessage.inc',
+      'class' => 'custom_context_context_reaction_showmessage',
+      'parent' => 'context_reaction',
+    ),
+  );
   return $plugins;
 } // custom_context_context_plugins
 
@@ -68,6 +77,12 @@ function custom_context_context_registry() {
         'plugin' => 'custom_context_context_condition_timebased',
       ),
     ),
+    'reactions' => array(
+      'showmessage' => array(
+        'title' => t('Show a message on the site.'),
+        'plugin' => 'custom_context_context_reaction_showmessage',
+      ),
+    ),
   );
 } // custom_context_context_registry
 
@@ -88,3 +103,12 @@ function custom_context_context_page_condition() {
     } // if
   } // foreach
 } // custom_context_context_page_condition
+
+/**
+ * Implements hook_context_page_reaction.
+ */
+function custom_context_context_page_reaction() {
+  if ($plugin = context_get_plugin('reaction', 'showmessage')) {
+    $plugin->execute();
+  } // if
+} // custom_context_context_page_reaction
