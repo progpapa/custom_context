@@ -21,7 +21,6 @@ class custom_context_context_condition_userpermission extends context_condition{
 
   /**
    * Override of condition_form().
-   * Use multiselect widget.
    */
   function condition_form($context) {
     $form = parent::condition_form($context);
@@ -33,7 +32,6 @@ class custom_context_context_condition_userpermission extends context_condition{
 
   /**
    * Override of condition_form_submit().
-   * Trim any identifier padding for non-unique path menu items.
    */
   function condition_form_submit($values) {
     return drupal_map_assoc(array($values));
@@ -50,4 +48,4 @@ class custom_context_context_condition_userpermission extends context_condition{
     } // if
   } // execute
 
-}  // mycontext_context_condition_userpermission
+}  // custom_context_context_condition_userpermission
